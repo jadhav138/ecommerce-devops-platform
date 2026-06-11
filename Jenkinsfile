@@ -1,16 +1,10 @@
 pipeline {
-    agent any  // first step to build the automated process.
+    agent any
 
     stages {
         stage('Checkout') {
             steps {
-                echo 'Checking out code from GitHub...'
-            }
-        }
-
-        stage('Install Dependencies') {
-            steps {
-                sh 'npm install'
+                echo 'Code checked out from GitHub'
             }
         }
 
