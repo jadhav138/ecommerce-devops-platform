@@ -1,3 +1,5 @@
+const client = require("prom-client");
+
 const express = require("express");
 
 const authRoutes = require("./routes/auth");
@@ -7,6 +9,37 @@ const orderRoutes = require("./routes/orders");
 const app = express(); // 👈 MUST BE FIRST
 
 app.use(express.json());
+
+const register = new client.Registry();
+
+client.collectDefaultMetrics({
+  register
+});
+
+const httpRequestCounter = new client.Counter({
+  name: "http_requests_total",
+  help: "Total number of HTTP requests",
+  labelNames: ["method", "route", "status"]
+});
+
+register.registerMetric(httpRequestCounter);
+
+app.use((req, res, next) => {
+  res.on("finish", () => {
+    httpRequestCounter.inc({
+      method: req.method,
+      route: req.path,
+      status: res.statusCode
+    });
+  });
+
+  next();
+});
+
+app.get("/metrics", async (req, res) => {
+  res.set("Content-Type", register.contentType);
+  res.end(await register.metrics());
+});
 
 // Routes
 app.use("/api/auth", authRoutes);
