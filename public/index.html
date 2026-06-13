@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ShopSphere</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="logo">ShopSphere</div>
+    <input class="search" placeholder="Search products, brands and categories">
+    <nav>
+      <a href="/login.html">Login</a>
+      <a href="/register.html">Register</a>
+      <a href="/products.html">Products</a>
+      <a href="/orders.html">Orders</a>
+      <a href="#" onclick="logout()">Logout</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>Everything you need, delivered fast.</h1>
+      <p>Shop electronics, accessories, and daily essentials from a cloud-native e-commerce platform.</p>
+      <a class="btn" href="/products.html">Shop Now</a>
+    </div>
+  </section>
+
+  <section class="container">
+    <h2>Featured Categories</h2>
+
+    <div class="grid">
+      <div class="card">💻 <h3>Electronics</h3><p>Laptops, keyboards, accessories</p></div>
+      <div class="card">🎧 <h3>Accessories</h3><p>Headphones, mouse, cables</p></div>
+      <div class="card">🏠 <h3>Home</h3><p>Smart devices and essentials</p></div>
+      <div class="card">📦 <h3>Orders</h3><p>Track your purchases easily</p></div>
+    </div>
+
+    <h2>Platform Features</h2>
+
+    <div class="grid">
+      <div class="card"><h3>Secure Login</h3><p>JWT authentication with encrypted passwords.</p></div>
+      <div class="card"><h3>Kubernetes Ready</h3><p>Application deployed using Helm and ArgoCD.</p></div>
+      <div class="card"><h3>Live Monitoring</h3><p>Prometheus and Grafana track app metrics.</p></div>
+      <div class="card"><h3>Centralized Logs</h3><p>ELK stack collects and searches application logs.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <p>ShopSphere — DevOps Powered E-Commerce Platform</p>
+  </footer>
+
+</body>
+</html>

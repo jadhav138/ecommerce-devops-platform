@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login - ShopSphere</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">ShopSphere</div>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/register.html">Register</a>
+    <a href="/products.html">Products</a>
+    <a href="/orders.html">Orders</a>
+  </nav>
+</header>
+
+<section class="auth-page">
+  <div class="auth-card">
+    <h2>Welcome back</h2>
+    <p class="subtitle">Login to view products and manage orders.</p>
+
+    <input id="email" placeholder="Email Address">
+    <input id="password" type="password" placeholder="Password">
+
+    <button onclick="loginUser()">Login</button>
+
+    <p id="message" class="message"></p>
+
+    <p class="switch-link">
+      New here? <a href="/register.html">Create account</a>
+    </p>
+  </div>
+</section>
+
+<script src="app.js"></script>
+</body>
+</html>
