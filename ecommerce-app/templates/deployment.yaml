@@ -1,40 +1,28 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "ecommerce-app.fullname" . }}
-  labels:
-    {{- include "ecommerce-app.labels" . | nindent 4 }}
+  name: ecommerce-app
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: 1
   selector:
     matchLabels:
-      {{- include "ecommerce-app.selectorLabels" . | nindent 6 }}
+      app: ecommerce-app
   template:
     metadata:
       labels:
-        {{- include "ecommerce-app.selectorLabels" . | nindent 8 }}
+        app: ecommerce-app
     spec:
-      serviceAccountName: {{ include "ecommerce-app.serviceAccountName" . }}
       containers:
         - name: ecommerce-app
-          image: "rudhra378/ecommerce-app:latest"
-          imagePullPolicy: Always
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "128Mi"
-            limits:
-              cpu: "500m"
-              memory: "512Mi"
+          image: rudhra378/ecommerce-app:latest
           ports:
-            - name: http
-              containerPort: 3000
-              protocol: TCP
+            - containerPort: 3000
+
+          envFrom:
+            - configMapRef:
+                name: ecommerce-app-config
+
           env:
-            - name: DB_HOST
-              value: postgres-service
-            - name: DB_PORT
-              value: "5432"
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
@@ -55,11 +43,11 @@ spec:
                 secretKeyRef:
                   name: ecommerce-app-secret
                   key: JWT_SECRET
-          livenessProbe:
-            httpGet:
-              path: /health
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /health
-              port: http
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
